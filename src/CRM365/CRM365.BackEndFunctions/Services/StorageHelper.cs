@@ -12,10 +12,12 @@ namespace CRM365.BackEndFunctions.Services
     {
         private readonly string connectionString;
         private readonly CloudQueue cloudQueueClientProduto;
+        private readonly CloudQueue cloudQueueClientLogs;
         public readonly string filaProdutos = "produto";
-        
+        public readonly string filalogs = "logs-funcoes";
 
-        public enum TipoFila { Produto = 0}
+
+        public enum TipoFila { Produto = 0, Logs = 1}
 
         public StorageHelper()
         {
@@ -28,6 +30,9 @@ namespace CRM365.BackEndFunctions.Services
             cloudQueueClientProduto = queueClient.GetQueueReference(filaProdutos);
             cloudQueueClientProduto.CreateIfNotExists();
 
+            cloudQueueClientLogs = queueClient.GetQueueReference(filalogs);
+            cloudQueueClientLogs.CreateIfNotExists();
+
         }
 
         
@@ -36,6 +41,9 @@ namespace CRM365.BackEndFunctions.Services
             var cloudMesage = new CloudQueueMessage(message);
             if(fila == TipoFila.Produto)
                 cloudQueueClientProduto.AddMessageAsync(cloudMesage).GetAwaiter().GetResult();
+
+            if (fila == TipoFila.Logs)
+                cloudQueueClientLogs.AddMessageAsync(cloudMesage).GetAwaiter().GetResult();
             Console.WriteLine($"Mensagem inserida na fila: {message}");
         }
     }
