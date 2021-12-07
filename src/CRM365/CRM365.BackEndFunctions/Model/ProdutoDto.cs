@@ -14,5 +14,9 @@ namespace CRM365.BackEndFunctions.Model
 
         [JsonProperty(PropertyName = "nome")]
         public string Nome { get; set; }
+
+        [JsonProperty(PropertyName = "data_criacao")]
+        public DateTime? DataCriacao { get; set; }
+
     }
 }
