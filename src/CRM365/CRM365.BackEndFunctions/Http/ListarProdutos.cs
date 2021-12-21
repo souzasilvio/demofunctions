@@ -22,6 +22,7 @@ namespace CRM365.BackEndFunctions.Http
             var lista = new List<Model.ProdutoDto>();
             lista.Add(new Model.ProdutoDto() { Id = new System.Guid(), Nome = "Produto 1"});
             lista.Add(new Model.ProdutoDto() { Id = new System.Guid(), Nome = "Produto 2" });
+            lista.Add(new Model.ProdutoDto() { Id = new System.Guid(), Nome = "Produto 2" });
 
             return req.CreateResponse(HttpStatusCode.OK, lista);
         }
