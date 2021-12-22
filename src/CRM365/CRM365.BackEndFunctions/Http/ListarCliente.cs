@@ -11,18 +11,18 @@ using Microsoft.Azure.WebJobs.Host;
 
 namespace CRM365.BackEndFunctions.Http
 {
-    public static class ListarProdutos
+    public static class ListarCliente
     {
-        [FunctionName("ListarProdutos")]
-        [OpenApiOperation(operationId: "ListarProdutos", tags: new[] { "Produto", "v1" }, Summary = "Listar produtos", Description = "Listar produtos.", Visibility = OpenApiVisibilityType.Important)]
+        [FunctionName("ListarClientes")]
+        [OpenApiOperation(operationId: "ListarClientes", tags: new[] { "Cliente", "v1" }, Summary = "Listar Cliente", Description = "Listar produtos.", Visibility = OpenApiVisibilityType.Important)]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(List<Model.ProdutoDto>), Summary = "Lista com os contato relacionados a conta", Description = "Lista de produtos")]
 
-        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "api/produto/listar")]HttpRequestMessage req)
+        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "api/cliente/listar")] HttpRequestMessage req)
         {
             var lista = new List<Model.ProdutoDto>();
-            lista.Add(new Model.ProdutoDto() { Id = new System.Guid(), Nome = "Produto 1"});
-            lista.Add(new Model.ProdutoDto() { Id = new System.Guid(), Nome = "Produto 2" });
-            lista.Add(new Model.ProdutoDto() { Id = new System.Guid(), Nome = "Produto 2" });
+            lista.Add(new Model.ProdutoDto() { Id = new System.Guid(), Nome = "Cliente 1" });
+            lista.Add(new Model.ProdutoDto() { Id = new System.Guid(), Nome = "Cliente 2" });
+            lista.Add(new Model.ProdutoDto() { Id = new System.Guid(), Nome = "Cliente 2" });
 
 
             return req.CreateResponse(HttpStatusCode.OK, lista);
